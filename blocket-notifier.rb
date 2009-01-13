@@ -1,10 +1,12 @@
+# Include from the Ruby Standard Library
+require 'open-uri'
+require 'uri'
+
 # Include required gems
 require 'rubygems'
 require 'highline/import'
 require 'daemons'
 require 'hpricot'
-require 'open-uri'
-require 'uri'
 
 # Check if the first parameter is run or start
 if(/^run|start$/.match(ARGV[0])) 
