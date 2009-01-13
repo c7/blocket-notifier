@@ -20,8 +20,8 @@ if(/^run|start$/.match(ARGV[0]))
   # Initialize default config hash
   @config = { 
     :base_url => 'http://www.blocket.se/li?ca=AREA&q=QUERY&cg=CATEGORY&th=0&f=FILTER',
-    :area => '11_s', # Default to Stockholm
-    :filter => 'p', # Defaults to only private
+    :area => '11_s',
+    :filter => 'p',
     :sleep_interval => 10,
     :category => 0,
     :max_price => 10000,
@@ -77,37 +77,37 @@ if(/^run|start$/.match(ARGV[0]))
   end
   
   # The search query
-  @config[:query] = ask(@text[:search_query]) { |q| 
+  @config[:query] = ask(@text[:search_query]) do |q| 
     q.validate = QUERY_PATTERN
     q.responses[:not_valid] = @text[:search_query_not_valid]
-  }
+  end
   
   # Category code for the product
-  @config[:category] = ask(@text[:category_code]) { |q| 
+  @config[:category] = ask(@text[:category_code]) do |q| 
     q.default = @config[:category]
-  }
+  end
   
   # Geographical area
-  @config[:area] = ask(@text[:area_code]) { |q| 
-    q.default = @config[:area] 
-  }
+  @config[:area] = ask(@text[:area_code]) do |q| 
+    q.default = @config[:area]
+  end
   
   # Filtering
-  @config[:filter] = ask(@text[:filter_code]) { |q| 
+  @config[:filter] = ask(@text[:filter_code]) do |q| 
     q.validate = FILTER_PATTERN
     q.responses[:not_valid] = @text[:filter_code_not_valid]
     q.default = @config[:filter] 
-  }
+  end
   
   # Set the max price
-  @config[:max_price] = ask(@text[:max_price], Integer) { |q| 
+  @config[:max_price] = ask(@text[:max_price], Integer) do |q| 
     q.default = @config[:max_price] 
-  }
+  end
   
   # Set the min price
-  @config[:min_price] = ask(@text[:min_price], Integer) { |q| 
+  @config[:min_price] = ask(@text[:min_price], Integer) do |q| 
     q.default = @config[:min_price]
-  }
+  end
 end
 
 Daemons.run_proc('blocket-notifier.rb') do
