@@ -15,5 +15,5 @@ A small daemon that sends a notification when a matching ad is posted on blocket
  
 ## How to use
 
-...
+    ruby blocket-notifier.rb start
 
